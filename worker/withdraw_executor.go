@@ -153,7 +153,7 @@ func (w *WithdrawExecutor) runWithdrawBack(ctx context.Context) {
 	for {
 		select {
 		case <-time.After(common.WithdrawBackInspectorTime * time.Second):
-			withdraws, err := service.GetWithdrawsByEndAt(common.WithdrawBack)
+			withdraws, err := service.GetWithdrawsByEndAt(common.WithdrawBackMinute)
 			if err != nil {
 				log.GetLog().Error("service GetWithdrawsByEndAt", zap.Error(err))
 				continue

@@ -7,6 +7,22 @@ const (
 )
 
 const (
+	ApplyMaxNum   = 5 // 20 5
+	ArbiterMaxNum = 3 // 5  3
+	VoteMinNum    = 2 // 3  2
+)
+
+const (
+	ApplyMinute     uint = 1440
+	VoteMinute      uint = 1440
+	CloseMinute     uint = 10 //
+	RewardMinute    uint = 10
+	RewardChaMinute uint = 10
+	PaymentMinute   uint = 10
+	PendingMinute   uint = 10 //14 * 1440
+)
+
+const (
 	BlockNumberDeposit     = "block_number_deposit"
 	BlockNumberClaim       = "block_number_claim"
 	AdminAddressNum        = 8
@@ -17,15 +33,17 @@ const (
 )
 
 const (
-	ConfirmBlock     uint64 = 0
-	UnitNSure        int64  = 1_000_000_000_000_000_000
-	AccountNSure            = "0x123456aaa"
-	AccountChallenge        = "0x123456ccc"
-	AccountPayment          = "0x123456bbb"
-	CurrencyNSure           = "Nsure"
-	ArbiterNSure     int64  = 5000
-	ChallengeTimes   int64  = 10
-	CookieMaxAge            = 7 * 24 * 60 * 60
+	ConfirmBlock       uint64 = 2
+	WithdrawBackMinute uint   = 8
+
+	UnitNSure        int64 = 1_000_000_000_000_000_000
+	AccountNSure           = "0x123456aaa"
+	AccountChallenge       = "0x123456ccc"
+	AccountPayment         = "0x123456bbb"
+	CurrencyNSure          = "Nsure"
+	ArbiterNSure     int64 = 5000
+	ChallengeTimes   int64 = 10
+	CookieMaxAge           = 7 * 24 * 60 * 60
 )
 
 const (
@@ -46,54 +64,35 @@ const (
 	LoginLruSize = 1000
 	MaxRandNum   = 1000_000
 
-	PendingWorkChanNum       = 1000
+	PendingWorkChanNum       = 100
 	PendingWorkUnsettleCount = 1000
-	PendingInspectorTime     = 60
+	PendingInspectorTime     = 10
 
-	BillWorkChanNum       = 1000
+	BillWorkChanNum       = 100
 	BillWorkUnsettleCount = 1000
-	BillInspectorTime     = 30
+	BillInspectorTime     = 10
 
-	DepositInspectorTime      = 5
-	WithdrawInspectorTime     = 5
-	WithdrawBackInspectorTime = 5
+	DepositInspectorTime      = 120
+	WithdrawInspectorTime     = 120
+	WithdrawBackInspectorTime = 20
 
-	PaymentWorkChanNum   = 1000
 	PaymentInspectorTime = 30
 
 	RewardInspectorTime    = 30
 	RewardChaInspectorTime = 30
-	PunishChaInspectorTime = 30
 
-	FillWorkChanNum       = 1000
-	FillWorkUnsettleCount = 1000
+	VoteFillWorkChanNum   = 100
 	VoteFillInspectorTime = 30
 
-	ChallengeWorkChanNum       = 1000
+	ChallengeWorkChanNum       = 100
 	ChallengeWorkUnsettleCount = 1000
 	ChallengeInspectorTime     = 30
 
-	ApplyWorkChanNum   = 1000
-	ApplyInspectorTime = 1
-	ClaimInspectorTime = 2
+	ApplyWorkChanNum   = 100
+	ApplyInspectorTime = 10
+	ClaimInspectorTime = 20
 
-	VoteWorkChanNum   = 1000
-	VoteInspectorTime = 1
-)
-
-const (
-	ApplyMinute     uint = 1440
-	VoteMinute      uint = 1440
-	CloseMinute     uint = 10 //
-	RewardMinute    uint = 10
-	RewardChaMinute uint = 10
-	PunishChaMinute uint = 10
-	PaymentMinute   uint = 10
-	WithdrawBack    uint = 0
-	ApplyMaxNum          = 5  // 20 5
-	ArbiterMaxNum        = 3  // 5  3
-	VoteMinNum           = 2  // 3  2
-	PendingTime     uint = 10 //14 * 1440
+	VoteInspectorTime = 10
 )
 
 const (
@@ -152,5 +151,4 @@ const (
 	TypedDataDomainNameClaim    = "Treasury"
 	TypedDataDomainNameWithdraw = "Treasury"
 	DurationClaim               = 30
-	DurationWithdraw            = 30
 )

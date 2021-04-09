@@ -21,7 +21,7 @@ func (f *VoteFillExecutor) Start(ctx context.Context, wg *sync.WaitGroup) {
 
 func NewVoteFillExecutor() *VoteFillExecutor {
 	return &VoteFillExecutor{
-		workerCh: make(chan int64, common.FillWorkChanNum),
+		workerCh: make(chan int64, common.VoteFillWorkChanNum),
 	}
 }
 

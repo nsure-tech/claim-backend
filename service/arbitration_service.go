@@ -194,7 +194,7 @@ func HasEnoughAvailable(userId string, num int) (bool, error) {
 }
 
 func GetUnsettledPends(count int) ([]*models.Pending, error) {
-	return mysql.SharedStore().GetUnsettledPends(common.PendingTime, count)
+	return mysql.SharedStore().GetUnsettledPends(common.PendingMinute, count)
 }
 
 func ExecutePending(pending *models.Pending) error {
