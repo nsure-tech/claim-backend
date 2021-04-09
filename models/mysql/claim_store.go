@@ -99,6 +99,7 @@ func (s *Store) GetClaimById(claimId int64) (*models.Claim, error) {
 
 func (s *Store) GetClaimByUserId(userId string) ([]*models.Claim, error) {
 	db := s.db.Where("user_id=?", userId)
+	db = db.Order("id DESC")
 
 	var claims []*models.Claim
 	err := db.Find(&claims).Error

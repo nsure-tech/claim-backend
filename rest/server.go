@@ -63,6 +63,8 @@ func SetupRouter() *gin.Engine {
 
 	r.GET("/api/asset", AssetHistory)
 
+	r.GET("/api/claimListUser", GetClaimListByUserId)
+
 	// test
 	r.POST("/api/withdrawTest", PlaceWithdrawTest)
 

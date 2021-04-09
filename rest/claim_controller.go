@@ -210,6 +210,29 @@ func GetClaimListNew(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, newMessageDataOK(listClaim))
 }
 
+func GetClaimListByUserId(ctx *gin.Context) {
+	userId := ctx.Query("userId")
+	if len(userId) != 0 {
+		userId = utils.Address(userId)
+	}
+
+	claims, err := service.GetClaimByUserId(userId)
+	if err != nil {
+		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
+		return
+	}
+
+	var claimLists []*claimList
+	for _, claim := range claims {
+		claimLists = append(claimLists, newClaimList(claim))
+	}
+	if claimLists == nil {
+		ctx.JSON(http.StatusOK, newMessageDataOK(""))
+	} else {
+		ctx.JSON(http.StatusOK, newMessageDataOK(claimLists))
+	}
+}
+
 func GetClaimListAdmin(ctx *gin.Context) {
 	arbiterId := ctx.Query("userId")
 	if len(arbiterId) != 0 {
