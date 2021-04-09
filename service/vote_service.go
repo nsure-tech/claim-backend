@@ -127,6 +127,10 @@ func GetVoteByVoteNum(voteNum uint8) ([]*common.ClaimId, error) {
 	return mysql.SharedStore().GetVoteByVoteNum(statuses, voteNum)
 }
 
+func GetVoteByClaimId(claimId int64) ([]*models.Vote, error) {
+	return mysql.SharedStore().GetVoteByClaimId(claimId)
+}
+
 func ExecuteVote(claimId int64) error {
 	tx, err := mysql.SharedStore().BeginTx()
 	if err != nil {
@@ -159,11 +163,11 @@ func ExecuteVote(claimId int64) error {
 	claim.VoteAt = time.Now()
 	claim.VoteNum = pass + deny
 
-	if pass >= common.VoteMaxNum {
+	if pass >= common.VoteMinNum {
 		claim.Status = common.ClaimStatusPass
 		claim.PaymentStatus = common.PaymentStatusPass
 		rewardNum = pass
-	} else if deny >= common.VoteMaxNum {
+	} else if deny >= common.VoteMinNum {
 		claim.Status = common.ClaimStatusDeny
 		claim.PaymentStatus = common.PaymentStatusFail
 		rewardNum = deny

@@ -82,8 +82,7 @@ const (
 )
 
 const (
-	ClaimMinute     uint  = 1440
-	Apply1Minute    uint  = 1440
+	ApplyMinute     uint  = 1440
 	VoteMinute      uint  = 1440
 	CloseMinute     uint  = 10 //
 	RewardMinute    uint  = 10
@@ -93,7 +92,7 @@ const (
 	WithdrawBack    uint  = 0
 	ApplyMaxNum     uint8 = 5  // 20 5
 	ArbiterMaxNum         = 3  // 5  3
-	VoteMaxNum            = 2  // 3  2
+	VoteMinNum            = 2  // 3  2
 	PendingTime     uint  = 10 //14 * 1440
 )
 

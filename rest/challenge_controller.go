@@ -109,7 +109,7 @@ func GetChallengeChaAmount(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, newMessageBadRequest(err))
 		return
 	}
-	if account ==nil{
+	if account == nil {
 		ctx.JSON(http.StatusOK, newMessageBadRequest(fmt.Errorf("user does not exist")))
 		return
 	}

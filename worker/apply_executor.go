@@ -18,8 +18,8 @@ type ApplyExecutor struct {
 func (a *ApplyExecutor) Start(ctx context.Context, wg *sync.WaitGroup) {
 	go a.runApplyInspector(ctx)
 	go a.runApplyProcess(wg)
-	//go a.runClaimInspector(ctx)
-	//go a.runClaimProcess(wg)
+	go a.runClaimInspector(ctx)
+	go a.runClaimProcess(wg)
 }
 
 func NewApplyExecutor() *ApplyExecutor {

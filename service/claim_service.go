@@ -62,10 +62,10 @@ func AddClaim(userId, product, coverId, coverHash, currency string, amount, cost
 }
 
 func GetClaimByApply() ([]*models.Claim, error) {
-	return mysql.SharedStore().GetClaimByApply(common.ClaimStatusNew, common.ClaimMinute, common.ApplyMaxNum)
+	return mysql.SharedStore().GetClaimByApply(common.ClaimStatusNew, common.ApplyMinute, common.ApplyMaxNum)
 }
 func GetClaimByEndApply() ([]*models.Claim, error) {
-	return mysql.SharedStore().GetClaimByEndApply(common.ClaimStatusNew, common.ClaimMinute)
+	return mysql.SharedStore().GetClaimByEndApply(common.ClaimStatusNew, common.ApplyMinute)
 }
 func GetClaimByEndVote() ([]*models.Claim, error) {
 	return mysql.SharedStore().GetClaimByEndVote(common.ClaimStatusArbiter, common.VoteMinute)
@@ -115,7 +115,7 @@ func GetClaimResult(claimId int64) (*models.Claim, []*models.Vote, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	votes, err := mysql.SharedStore().GetVoteByClaimId(claimId)
+	votes, err := GetVoteByClaimId(claimId)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -209,7 +209,7 @@ func GetClaimByArbiterId(arbiterId string) ([]*models.Claim, error) {
 	if qualification.Available <= 0 {
 		return nil, errors.New("no available qualifications")
 	}
-	claims, err := mysql.SharedStore().GetClaimByApply(common.ClaimStatusNew, common.ClaimMinute, common.ApplyMaxNum)
+	claims, err := GetClaimByApply()
 	if err != nil {
 		return nil, err
 	}
@@ -244,7 +244,9 @@ func ExecuteClaim(claimId int64) error {
 		return err
 	}
 	if len(applies) < common.ArbiterMaxNum {
-		return ReturnApply(claimId)
+		//return ReturnApply(claimId)
+		log.GetLog().Warn("claimId apply num", zap.Int64("claimId", claimId), zap.Int("apply num", len(applies)))
+		return fmt.Errorf("claimId(%v) apply num(%v)", claimId, len(applies))
 	} else {
 		return ExecuteApply(claimId)
 	}

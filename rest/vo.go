@@ -176,7 +176,7 @@ func newClaimVote(claim *models.Claim) *claimVote {
 			Cost:         utils.DToString(claim.Cost),
 			Reward:       utils.DToString(claim.Reward),
 			SubmitAt:     claim.SubmitAt.Format(time.RFC3339),
-			SubmitEndAt:  claim.SubmitAt.Add(time.Duration(common.ClaimMinute) * time.Minute).String(),
+			SubmitEndAt:  claim.SubmitAt.Add(time.Duration(common.ApplyMinute) * time.Minute).String(),
 			CoverBeginAt: claim.CoverBeginAt.Format(time.RFC3339),
 			CoverEndAt:   claim.CoverEndAt.Format(time.RFC3339),
 			Desc:         claim.Description,
@@ -282,7 +282,7 @@ func newApplyList(apply *models.Apply) *applyList {
 	residua := "0s"
 	endAt := time.Now()
 	if apply.Status == common.ApplyStatusApply {
-		endAt = apply.SubmitAt.Add(time.Duration(common.ClaimMinute) * time.Minute)
+		endAt = apply.SubmitAt.Add(time.Duration(common.ApplyMinute) * time.Minute)
 		if dur := time.Until(endAt); dur > 0 {
 			residua = dur.String()
 		}
