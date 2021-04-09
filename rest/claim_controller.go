@@ -226,8 +226,9 @@ func GetClaimListByUserId(ctx *gin.Context) {
 	for _, claim := range claims {
 		claimLists = append(claimLists, newClaimList(claim))
 	}
+	ctx.JSON(http.StatusOK, newMessageDataOK(claimLists))
 	if claimLists == nil {
-		ctx.JSON(http.StatusOK, newMessageDataOK(""))
+		ctx.JSON(http.StatusOK, newMessageDataOK([]struct{}{}))
 	} else {
 		ctx.JSON(http.StatusOK, newMessageDataOK(claimLists))
 	}

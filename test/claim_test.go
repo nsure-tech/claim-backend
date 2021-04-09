@@ -53,7 +53,7 @@ func TestGetNewClaim(t *testing.T) {
 }
 func TestGetClaimUserId(t *testing.T) {
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/api/claimListUser?userId=0x2e9475c282069675fFAc22a8cd5038E4DAC01634", nil)
+	req, _ := http.NewRequest("GET", "/api/claimListUser?userId=0x2e9475c282069675fFAc22a8cd5038E4DAC0163", nil)
 	router := rest.SetupRouter()
 	router.ServeHTTP(w, req)
 
