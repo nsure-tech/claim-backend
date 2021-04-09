@@ -101,17 +101,21 @@ func GetChallengeChaAmount(ctx *gin.Context) {
 
 	claim, err := service.GetClaimById(claimId)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, newMessageBadRequest(err))
+		ctx.JSON(http.StatusOK, newMessageBadRequest(err))
 		return
 	}
 	account, err := service.GetBalanceByUserId(userId)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, newMessageBadRequest(err))
+		ctx.JSON(http.StatusOK, newMessageBadRequest(err))
+		return
+	}
+	if account ==nil{
+		ctx.JSON(http.StatusOK, newMessageBadRequest(fmt.Errorf("user does not exist")))
 		return
 	}
 	chaAmount, err := utils.ChallengeNSure(claim.Amount)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, newMessageBadRequest(err))
+		ctx.JSON(http.StatusOK, newMessageBadRequest(err))
 		return
 	}
 	chaAmountVo := &ChaAmountVo{
