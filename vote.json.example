@@ -1,0 +1,28 @@
+{
+  "dataSource": {
+    "driverName": "mysql",
+    "addr": "192.168.182.3:3306",
+    "database": "vote0330",
+    "user": "myuser",
+    "password": "mypass",
+    "enableAutoMigrate": false
+  },
+  "restServer": {
+    "addr": ":3009"
+  },
+  "log": {
+    "level": 1,
+    "filename":   "vote.log",
+    "max_size":    100,
+    "max_backups": 0,
+    "max_age":     1,
+    "compress":   false
+  },
+  "jwtSecret": "123456123456",
+  "rawUrl":"wss://kovan.infura.io/ws/v3/a2d9955da24547658b9e9816d74b9716",
+  "chainId":42,
+  "keySecret": "bedc29b75d3dcbcacd6d13b643d52bae89188ae874bee77ebefe4d317cd27c16",
+  "contractTreasuryAddress":"0x2E64489F16Ec1cB7131EE4c37e5044799fBcFbd2",
+  "contractBuyAddress":"0x92621A98074747E3648D11627aE3B182a010e574",
+  "depositAddress": "0x2E64489F16Ec1cB7131EE4c37e5044799fBcF"
+}
