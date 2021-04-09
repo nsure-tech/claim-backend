@@ -149,7 +149,7 @@ func ClaimApply(claimId int64, arbiterId string) (string, error) {
 		}
 	}
 	applyNum := len(applies)
-	if applyNum >= int(common.ApplyMaxNum) {
+	if applyNum >= common.ApplyMaxNum {
 		return "", errors.New("already max apply num")
 	}
 

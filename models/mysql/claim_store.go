@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func (s *Store) GetClaimByApply(status common.ClaimStatus, applyTime uint, applyNum uint8) ([]*models.Claim, error) {
+func (s *Store) GetClaimByApply(status common.ClaimStatus, applyTime uint, applyNum uint) ([]*models.Claim, error) {
 	db := s.db.Where("status=?", status)
 	db = db.Where("apply_num<?", applyNum)
 	db = db.Where("settled=0 AND ADDDATE(submit_at,interval ? minute) > now()", applyTime)

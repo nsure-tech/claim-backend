@@ -82,7 +82,7 @@ type Store interface {
 
 	GetClaim(userId string, product string, status common.ClaimStatus, beforeId, afterId int64, limit int) ([]*Claim, error)
 	GetClaimList(userId string, product string, status common.ClaimStatus, offset, limit int) ([]*Claim, error)
-	GetClaimByApply(status common.ClaimStatus, applyTime uint, applyNum uint8) ([]*Claim, error)
+	GetClaimByApply(status common.ClaimStatus, applyTime uint, applyNum uint) ([]*Claim, error)
 	GetClaimByEndApply(status common.ClaimStatus, applyTime uint) ([]*Claim, error)
 	GetClaimByEndVote(status common.ClaimStatus, voteTime uint) ([]*Claim, error)
 	GetClaimClose(statuses []common.ClaimStatus, paymentTime uint) ([]*Claim, error)
