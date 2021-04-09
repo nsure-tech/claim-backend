@@ -104,6 +104,7 @@ type Claim struct {
 	ApplyNum      int
 	VoteNum       int
 	Challenged    bool
+	Loss          string
 	Description   string
 	Credential    string
 	Settled       bool

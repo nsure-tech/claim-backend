@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-func AddClaim(userId, product, coverId, coverHash, currency string, amount, cost, reward decimal.Decimal, submitAt, beginAt, endAt time.Time, desc, cred string) (int64, error) {
+func AddClaim(userId, product, coverId, coverHash, currency string, amount, cost, reward decimal.Decimal, submitAt, beginAt, endAt time.Time, desc, cred, loss string) (int64, error) {
 	claim := &models.Claim{
 		UserId:       userId,
 		Product:      product,
@@ -30,6 +30,7 @@ func AddClaim(userId, product, coverId, coverHash, currency string, amount, cost
 		CoverEndAt:   endAt,
 		Description:  desc,
 		Credential:   cred,
+		Loss:         loss,
 		Status:       common.ClaimStatusNew,
 	}
 	oldClaim, err := mysql.SharedStore().GetClaimByHash(coverHash)

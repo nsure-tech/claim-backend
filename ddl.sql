@@ -119,6 +119,7 @@ CREATE TABLE `v_claim` (
                            `apply_num` int NOT NULL DEFAULT '0',
                            `vote_num` int NOT NULL DEFAULT '0',
                            `challenged` tinyint(1) NOT NULL DEFAULT '0',
+                           `loss` varchar(255) DEFAULT NULL,
                            `description` varchar(5000) DEFAULT NULL,
                            `credential` varchar(5000) DEFAULT NULL,
                            `settled` tinyint(1) NOT NULL DEFAULT '0',
@@ -393,3 +394,5 @@ insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 (null,null,"challenge_address_3","0x13"),
 (null,null,"challenge_address_4","0x14"),
 (null,null,"challenge_address_5","0x15");
+
+ALTER TABLE `v_claim` ADD `loss` varchar(255) DEFAULT NULL;

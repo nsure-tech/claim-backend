@@ -72,7 +72,7 @@ func PlaceClaim(ctx *gin.Context) {
 	cost := reward
 
 	userId = utils.Address(req.UserId)
-	ret, err := service.AddClaim(userId, req.Product, req.CoverId, req.CoverHash, req.Currency, amount, cost, reward, submitAt, beginAt, endAt, req.Desc, req.Cred)
+	ret, err := service.AddClaim(userId, req.Product, req.CoverId, req.CoverHash, req.Currency, amount, cost, reward, submitAt, beginAt, endAt, req.Desc, req.Cred, req.Loss)
 	if err != nil {
 		log.GetLog().Info("AddClaim", zap.Error(err))
 		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
@@ -152,7 +152,7 @@ func PlaceClaimChain(ctx *gin.Context) {
 		return
 	}
 
-	ret, err := service.AddClaim(userId, req.Product, req.CoverId, req.CoverHash, req.Currency, amount, buyClaim.Cost, buyClaim.Reward, submitAt, beginAt, endAt, req.Desc, req.Cred)
+	ret, err := service.AddClaim(userId, req.Product, req.CoverId, req.CoverHash, req.Currency, amount, buyClaim.Cost, buyClaim.Reward, submitAt, beginAt, endAt, req.Desc, req.Cred, req.Loss)
 	if err != nil {
 		log.GetLog().Info("AddClaim", zap.Error(err))
 		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
@@ -468,7 +468,7 @@ func PlaceClaimOld(ctx *gin.Context) {
 	//	ctx.JSON(http.StatusBadRequest, newMessageVo(fmt.Errorf("invalid user: #{req.UserId}")))
 	//	return
 	//}
-	ret, err := service.AddClaim(req.UserId, req.Product, req.CoverId, req.CoverHash, req.Currency, amount, cost, reward, submitAt, beginAt, endAt, req.Desc, req.Cred)
+	ret, err := service.AddClaim(req.UserId, req.Product, req.CoverId, req.CoverHash, req.Currency, amount, cost, reward, submitAt, beginAt, endAt, req.Desc, req.Cred, req.Loss)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, newMessageVo(err))
 		return

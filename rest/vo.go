@@ -26,12 +26,12 @@ type ClaimRequestMessage struct {
 	CoverHash string `json:"cover_hash"`
 	Currency  string `json:"currency"`
 	Amount    string `json:"amount"`
-	//Cost string `json:"cost"`
-	Reward  string `json:"reward"` // 投保仲裁回报的金额
-	BeginAt string `json:"begin_at"`
-	Period  int    `json:"period"`
-	Desc    string `json:"desc"`
-	Cred    string `json:"cred"`
+	Reward    string `json:"reward"` // 投保仲裁回报的金额
+	BeginAt   string `json:"begin_at"`
+	Period    int    `json:"period"`
+	Desc      string `json:"desc"`
+	Cred      string `json:"cred"`
+	Loss      string `json:"loss"`
 }
 
 type ClaimMetamask struct {
@@ -154,6 +154,7 @@ type ClaimRequest struct {
 	CoverEndAt   string `json:"cover_end_at"`
 	Desc         string `json:"desc"`
 	Cred         string `json:"cred"`
+	Loss         string `json:"loss"`
 }
 type claimVote struct {
 	ClaimId int64  `json:"claim_id"`
@@ -180,6 +181,7 @@ func newClaimVote(claim *models.Claim) *claimVote {
 			CoverEndAt:   claim.CoverEndAt.Format(time.RFC3339),
 			Desc:         claim.Description,
 			Cred:         claim.Credential,
+			Loss:         claim.Loss,
 		},
 	}
 
