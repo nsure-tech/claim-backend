@@ -66,3 +66,14 @@ func TestGetPayment(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	fmt.Println(w.Body.String())
 }
+
+func TestGetChallengeList(t *testing.T) {
+	router := rest.SetupRouter()
+	w := httptest.NewRecorder()
+
+	req, _ := http.NewRequest("GET", "/api/claimListChallenge", nil)
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, 200, w.Code)
+	fmt.Println(w.Body.String())
+}

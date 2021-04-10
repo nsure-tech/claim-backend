@@ -57,6 +57,7 @@ func SetupRouter() *gin.Engine {
 	r.GET("/api/challenge", GetChallengeChaAmount)
 	r.POST("/api/challenge", ApplyChallenge)
 
+	r.GET("/api/claimListChallenge", GetClaimListChallenge)
 	r.POST("/api/challengeResult", ChallengeVote)
 
 	r.POST("/api/withdraw", PlaceWithdraw)

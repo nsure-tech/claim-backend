@@ -74,6 +74,26 @@ func ChallengeVote(ctx *gin.Context) {
 	}
 }
 
+func GetClaimListChallenge(ctx *gin.Context) {
+	challenges, err := service.GetChallengeByStatus(common.ChallengeStatusApply, common.ChallengeWorkUnsettleCount)
+	if err != nil {
+		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
+		return
+	}
+
+	lists := make([]*claimList, len(challenges))
+	for i, payment := range challenges {
+		lists[i] = newClaimListChallenge(payment)
+	}
+
+	result := &claimResult{
+		Method: "challenge",
+		List:   lists,
+	}
+
+	ctx.JSON(http.StatusOK, newMessageDataOK(result))
+}
+
 func ApplyChallengeOld(ctx *gin.Context) {
 	var req ChallengeRequest
 	err := ctx.BindJSON(&req)

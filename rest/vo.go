@@ -241,6 +241,13 @@ type claimList struct {
 	Notes        string `json:"notes"`
 }
 
+type claimResult struct {
+	Method string       `json:"method"`
+	Page   int          `json:"page"`
+	Total  int          `json:"total"`
+	List   []*claimList `json:"list"`
+}
+
 func newClaimList(claim *models.Claim) *claimList {
 	return &claimList{
 		ClaimId:      claim.Id,
@@ -270,6 +277,19 @@ func newClaimListPayment(payment *models.Payment) *claimList {
 		Amount:    utils.DToString(payment.Amount),
 		Status:    string(payment.ClaimStatus),
 		Notes:     payment.Notes,
+	}
+}
+
+func newClaimListChallenge(challenge *models.Challenge) *claimList {
+	return &claimList{
+		ClaimId:   challenge.ClaimId,
+		UserId:    challenge.ChallengeId,
+		CoverId:   challenge.CoverId,
+		CoverHash: challenge.CoverHash,
+		Currency:  challenge.Currency,
+		Amount:    utils.DToString(challenge.Amount),
+		Status:    string(challenge.Status),
+		Notes:     challenge.Notes,
 	}
 }
 
