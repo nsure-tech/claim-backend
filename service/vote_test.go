@@ -17,7 +17,7 @@ var afterAccount map[string]*models.Account
 var afterQualification map[string]*models.Qualification
 
 func init() {
-	arbiters = []string{"test07", "test08", "test09"}
+	arbiters = []string{"test01", "test02", "test03"}
 	beforeAccount = make(map[string]*models.Account)
 	beforeQualification = make(map[string]*models.Qualification)
 	afterAccount = make(map[string]*models.Account)
@@ -25,7 +25,7 @@ func init() {
 
 	common.ChallengeAddress = make(map[string]struct{})
 	fmt.Println("INIT")
-	for i := 1; i <= common.ChallengeAddressNum; i++ {
+	for i := 1; i <= common.AdminAddressNum; i++ {
 		addressKey := common.ChallengeAddressPrefix + utils.IntToA(i)
 		if val, err := GetConfig(addressKey); err == nil && len(val) > 0 {
 			address := utils.Address(val)
@@ -37,7 +37,7 @@ func init() {
 }
 
 func TestVote2_1(t *testing.T) {
-	claimId := int64(13)
+	claimId := int64(27)
 	tGetAccountQua(beforeAccount, beforeQualification)
 
 	claim, err := tApply(claimId)
@@ -378,7 +378,7 @@ func TestVoteChaFail1_2(t *testing.T) {
 }
 
 func TestVoteChaSuccess1_2(t *testing.T) {
-	claimId := int64(23)
+	claimId := int64(34)
 	chaId := "cha04"
 	tGetAccountQua(beforeAccount, beforeQualification)
 
@@ -432,7 +432,8 @@ func TestVoteChaSuccess1_2(t *testing.T) {
 		return
 	}
 
-	time.Sleep(time.Minute)
+	time.Sleep(3*time.Minute)
+	time.Sleep(time.Duration(common.RewardMinute)*time.Minute)
 	tGetAccountQua(afterAccount, afterQualification)
 
 	arbiter := arbiters[2]

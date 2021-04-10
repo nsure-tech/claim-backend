@@ -32,11 +32,11 @@ func ExecuteReward(id int64) error {
 	if reward == nil {
 		return fmt.Errorf("reward is nil")
 	}
-	if err := AddWaitBill(tx, common.AccountNSure, reward.Currency, reward.Amount.Neg(), decimal.Zero,
+	if err := AddBill(tx, common.AccountNSure, reward.Currency, reward.Amount.Neg(), decimal.Zero,
 		common.BillTypeReward, ""); err != nil {
 		return err
 	}
-	if err := AddWaitBill(tx, reward.ArbiterId, reward.Currency, reward.Amount, decimal.Zero,
+	if err := AddBill(tx, reward.ArbiterId, reward.Currency, reward.Amount, decimal.Zero,
 		common.BillTypeReward, ""); err != nil {
 		return err
 	}
@@ -61,11 +61,11 @@ func ExecuteRewardCha(id int64) error {
 	if rewardCha == nil {
 		return fmt.Errorf("rewardCha is nil")
 	}
-	if err := AddWaitBill(tx, common.AccountChallenge, rewardCha.Currency, rewardCha.Amount.Neg(), decimal.Zero,
+	if err := AddBill(tx, common.AccountChallenge, rewardCha.Currency, rewardCha.Amount.Neg(), decimal.Zero,
 		common.BillTypeReward, ""); err != nil {
 		return err
 	}
-	if err := AddWaitBill(tx, rewardCha.ChallengeId, rewardCha.Currency, rewardCha.Amount, decimal.Zero,
+	if err := AddBill(tx, rewardCha.ChallengeId, rewardCha.Currency, rewardCha.Amount, decimal.Zero,
 		common.BillTypeReward, ""); err != nil {
 		return err
 	}
