@@ -78,6 +78,7 @@ type Store interface {
 	UpdatePayment(payment *Payment) error
 	GetPaymentByEnd(endTime uint) ([]*Payment, error)
 	GetPaymentForUpdate(id int64) (*Payment, error)
+	GetPaymentByClaimForUpdate(claimId int64) (*Payment, error)
 	GetUnsettledPayments(count int) ([]*Payment, error)
 
 	GetClaim(userId string, product string, status common.ClaimStatus, beforeId, afterId int64, limit int) ([]*Claim, error)

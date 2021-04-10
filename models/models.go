@@ -123,6 +123,8 @@ type Payment struct {
 	Amount      decimal.Decimal `gorm:"column:amount" sql:"type:decimal(64,0);"`
 	ClaimId     int64
 	ClaimStatus common.ClaimStatus
+	AdminId     string
+	Pay         decimal.Decimal `gorm:"column:pay" sql:"type:decimal(64,0);"`
 	Settled     bool
 	Notes       string
 }

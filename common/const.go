@@ -58,6 +58,7 @@ const (
 	BillTypeChallengeSuccess = BillType("Challenge Success")
 	BillTypeChallengeFail    = BillType("Challenge Fail")
 	BillTypeReward           = BillType("Claim Reward")
+	BillTypePayment          = BillType("Claim Pay")
 )
 
 const (

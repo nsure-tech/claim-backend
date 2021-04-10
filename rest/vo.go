@@ -70,6 +70,17 @@ type ChaVoteMetamask struct {
 	Content ChaVoteRequest `json:"content"`
 }
 
+type PaymentRequest struct {
+	UserId  string `json:"user_id"`
+	ClaimId int64  `json:"claim_id"`
+	Pay     string `json:"pay"`
+}
+
+type PaymentMetamask struct {
+	Method  string         `json:"method"`
+	Content PaymentRequest `json:"content"`
+}
+
 type VoteRequestMessage struct {
 	UserId    string `json:"user_id"`
 	ClaimId   int64  `json:"claim_id"`

@@ -26,8 +26,6 @@ func StartEngine(ctx context.Context, wg *sync.WaitGroup) {
 
 	worker.NewRewardExecutor().Start(ctx, wg)
 
-	worker.NewPaymentExecutor().Start(ctx, wg)
-
 	config := config.GetConfig()
 	httpServer := rest.NewHttpServer(config.RestServer.Addr)
 	go httpServer.Start()

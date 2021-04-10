@@ -330,6 +330,8 @@ CREATE TABLE `v_payment` (
                              `amount` decimal(64,0) NOT NULL DEFAULT '0',
                              `claim_id` bigint(20) NOT NULL,
                              `claim_status` varchar(255) DEFAULT NULL,
+                             `admin_id` varchar(255) DEFAULT NULL,
+                             `pay` decimal(64,0) NOT NULL DEFAULT '0',
                              `settled` tinyint(1) NOT NULL DEFAULT '0',
                              `notes` varchar(255) DEFAULT NULL,
                              PRIMARY KEY (`id`),
@@ -396,3 +398,7 @@ insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 (null,null,"challenge_address_5","0x15");
 
 ALTER TABLE `v_claim` ADD `loss` varchar(255) DEFAULT NULL;
+
+20210410
+ALTER TABLE  `v_payment` ADD `admin_id` varchar(255) DEFAULT NULL;
+ALTER TABLE  `v_payment` ADD `pay` decimal(64,0) NOT NULL DEFAULT '0';

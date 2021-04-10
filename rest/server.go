@@ -65,6 +65,8 @@ func SetupRouter() *gin.Engine {
 
 	r.GET("/api/claimListUser", GetClaimListByUserId)
 
+	r.POST("/api/claimPay", PaymentAdmin)
+
 	// test
 	r.POST("/api/withdrawTest", PlaceWithdrawTest)
 
