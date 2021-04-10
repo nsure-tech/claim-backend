@@ -246,7 +246,7 @@ func ExecuteClaim(claimId int64) error {
 	if len(applies) < common.ArbiterMaxNum {
 		//return ReturnApply(claimId)
 		log.GetLog().Warn("claimId apply num", zap.Int64("claimId", claimId), zap.Int("apply num", len(applies)))
-		return fmt.Errorf("claimId(%v) apply num(%v)", claimId, len(applies))
+		return nil
 	} else {
 		return ExecuteApply(claimId)
 	}

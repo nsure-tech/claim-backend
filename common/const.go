@@ -26,9 +26,9 @@ const (
 	BlockNumberDeposit     = "block_number_deposit"
 	BlockNumberClaim       = "block_number_claim"
 	AdminAddressNum        = 8
-	AdminAddressPrefix     = "admin_address_"
-	ChallengeAddressNum    = 5
+	VoteAddressPrefix      = "vote_address_"
 	ChallengeAddressPrefix = "challenge_address_"
+	PaymentAddressPrefix   = "payment_address_"
 	CurrencyPrefix         = "currency_"
 )
 

@@ -77,8 +77,8 @@ func ApplyVoteAdmin(claimId int64, status common.ClaimStatus, arbiterId, coverHa
 		return "", fmt.Errorf("vote errors isn't nil")
 	}
 
-	if !AdminAddress(arbiterId) {
-		return "", fmt.Errorf("%v isn't admin address", arbiterId)
+	if !VoteAddress(arbiterId) {
+		return "", fmt.Errorf("%v isn't vote admin address", arbiterId)
 	}
 	claim, err := tx.GetClaimById(claimId)
 	if err != nil {

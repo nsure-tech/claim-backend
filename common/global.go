@@ -6,5 +6,6 @@ var ClaimActive int
 var ClaimClosed int
 var RewardTotal decimal.Decimal
 
-var AdminAddress map[string]struct{}
+var VoteAddress map[string]struct{}
 var ChallengeAddress map[string]struct{}
+var PaymentAddress map[string]struct{}

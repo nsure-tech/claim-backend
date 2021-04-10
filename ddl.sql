@@ -381,14 +381,12 @@ insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 (null,null,"currency_1","Nsure");
 
 insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
-(null,null,"admin_address_1","0x11"),
-(null,null,"admin_address_2","0x12"),
-(null,null,"admin_address_3","0x13"),
-(null,null,"admin_address_4","0x14"),
-(null,null,"admin_address_5","0x15"),
-(null,null,"admin_address_6","0x16"),
-(null,null,"admin_address_7","0x17"),
-(null,null,"admin_address_8","0x18");
+(null,null,"vote_address_1","0x11"),
+(null,null,"vote_address_2","0x12");
+
+insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
+(null,null,"payment_address_1","0x11"),
+(null,null,"payment_address_2","0x12");
 
 insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 (null,null,"challenge_address_1","0x11"),
@@ -402,3 +400,10 @@ ALTER TABLE `v_claim` ADD `loss` varchar(255) DEFAULT NULL;
 20210410
 ALTER TABLE  `v_payment` ADD `admin_id` varchar(255) DEFAULT NULL;
 ALTER TABLE  `v_payment` ADD `pay` decimal(64,0) NOT NULL DEFAULT '0';
+insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
+(null,null,"vote_address_1","0x11"),
+(null,null,"vote_address_2","0x12");
+
+insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
+(null,null,"payment_address_1","0x11"),
+(null,null,"payment_address_2","0x12");

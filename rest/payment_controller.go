@@ -59,5 +59,10 @@ func GetClaimListPayment(ctx *gin.Context) {
 		lists[i] = newClaimListPayment(payment)
 	}
 
-	ctx.JSON(http.StatusOK, newMessageDataOK(lists))
+	result := &claimResult{
+		Method: "payment",
+		List:   lists,
+	}
+
+	ctx.JSON(http.StatusOK, newMessageDataOK(result))
 }

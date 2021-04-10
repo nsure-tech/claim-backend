@@ -46,7 +46,9 @@ func ExecutePayment(id int64) error {
 }
 
 func PaymentByAdmin(adminId string, claimId int64, pay decimal.Decimal) (bool, error) {
-	// todo if !ChallengeAddress(adminId){return false, fmt.Errorf("%v isn't payment admin address", adminId)}
+	if !PaymentAddress(adminId) {
+		return false, fmt.Errorf("%v isn't payment admin address", adminId)
+	}
 	tx, err := mysql.SharedStore().BeginTx()
 	if err != nil {
 		return false, err

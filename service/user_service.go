@@ -26,8 +26,8 @@ func init() {
 		panic(err)
 	}
 }
-func AdminAddress(address string) bool {
-	if _, found := common.AdminAddress[address]; found {
+func VoteAddress(address string) bool {
+	if _, found := common.VoteAddress[address]; found {
 		return true
 	}
 	return false
@@ -38,6 +38,13 @@ func ChallengeAddress(address string) bool {
 	}
 	return false
 }
+func PaymentAddress(address string) bool {
+	if _, found := common.PaymentAddress[address]; found {
+		return true
+	}
+	return false
+}
+
 func GetUserRand(userId string) (string, error) {
 	randInt, err := rand.Int(rand.Reader, big.NewInt(common.MaxRandNum))
 	if err != nil {

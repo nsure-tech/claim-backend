@@ -17,24 +17,35 @@ func init() {
 	common.ClaimActive, _ = service.GetClaimCount(false)
 	common.ClaimClosed, _ = service.GetClaimCount(true)
 	common.RewardTotal = service.GetRewardTotal()
-	common.AdminAddress = make(map[string]struct{})
+	common.VoteAddress = make(map[string]struct{})
 	for i := 1; i <= common.AdminAddressNum; i++ {
-		addressKey := common.AdminAddressPrefix + utils.IntToA(i)
+		addressKey := common.VoteAddressPrefix + utils.IntToA(i)
 		if val, err := service.GetConfig(addressKey); err == nil && len(val) > 0 {
 			address := utils.Address(val)
 			if len(address) != 0 {
-				common.AdminAddress[address] = struct{}{}
+				common.VoteAddress[address] = struct{}{}
 			}
 		}
 	}
 
 	common.ChallengeAddress = make(map[string]struct{})
-	for i := 1; i <= common.ChallengeAddressNum; i++ {
+	for i := 1; i <= common.AdminAddressNum; i++ {
 		addressKey := common.ChallengeAddressPrefix + utils.IntToA(i)
 		if val, err := service.GetConfig(addressKey); err == nil && len(val) > 0 {
 			address := utils.Address(val)
 			if len(address) != 0 {
 				common.ChallengeAddress[address] = struct{}{}
+			}
+		}
+	}
+
+	common.PaymentAddress = make(map[string]struct{})
+	for i := 1; i <= common.AdminAddressNum; i++ {
+		addressKey := common.PaymentAddressPrefix + utils.IntToA(i)
+		if val, err := service.GetConfig(addressKey); err == nil && len(val) > 0 {
+			address := utils.Address(val)
+			if len(address) != 0 {
+				common.PaymentAddress[address] = struct{}{}
 			}
 		}
 	}
