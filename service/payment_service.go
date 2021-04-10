@@ -12,6 +12,10 @@ func GetPaymentByEnd(endTime uint) ([]*models.Payment, error) {
 	return mysql.SharedStore().GetPaymentByEnd(endTime)
 }
 
+func GetPaymentUnsettled() ([]*models.Payment, error) {
+	return mysql.SharedStore().GetUnsettledPayments(common.PaymentCount)
+}
+
 func ExecutePayment(id int64) error {
 	tx, err := mysql.SharedStore().BeginTx()
 	if err != nil {

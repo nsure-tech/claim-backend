@@ -259,6 +259,20 @@ func newClaimList(claim *models.Claim) *claimList {
 	}
 }
 
+func newClaimListPayment(payment *models.Payment) *claimList {
+	return &claimList{
+		ClaimId:   payment.ClaimId,
+		UserId:    payment.UserId,
+		Product:   payment.Product,
+		CoverId:   payment.CoverId,
+		CoverHash: payment.CoverHash,
+		Currency:  payment.Currency,
+		Amount:    utils.DToString(payment.Amount),
+		Status:    string(payment.ClaimStatus),
+		Notes:     payment.Notes,
+	}
+}
+
 type claimListArbiter struct {
 	ActiveClaim   int          `json:"active_claim"`
 	MyActiveClaim int          `json:"my_active_claim"`
@@ -342,7 +356,7 @@ func newApplyListByClaim(claim *models.Claim) *applyList {
 
 func newClaimListVote(vote *models.Vote) *claimList {
 	return &claimList{
-		ClaimId:      vote.Id,
+		ClaimId:      vote.ClaimId,
 		UserId:       vote.UserId,
 		Product:      vote.Product,
 		CoverId:      vote.CoverId,

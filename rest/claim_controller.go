@@ -245,9 +245,9 @@ func GetClaimListAdmin(ctx *gin.Context) {
 		return
 	}
 
-	var claimLists []*claimList
+	var lists []*claimList
 	for _, claim := range claims {
-		claimLists = append(claimLists, newClaimList(claim))
+		lists = append(lists, newClaimList(claim))
 	}
 	qualification, err := service.GetQualificationByArbiterId(arbiterId)
 	if err != nil {
@@ -264,7 +264,7 @@ func GetClaimListAdmin(ctx *gin.Context) {
 		MyActiveClaim: qualification.Used,
 		MyHonors:      qualification.Closed,
 		Total:         0,
-		ClaimList:     claimLists,
+		ClaimList:     lists,
 	}
 
 	ctx.JSON(http.StatusOK, newMessageDataOK(listClaim))

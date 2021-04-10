@@ -78,6 +78,7 @@ const (
 	WithdrawBackInspectorTime = 20
 
 	PaymentInspectorTime = 30
+	PaymentCount         = 1000
 
 	RewardInspectorTime    = 30
 	RewardChaInspectorTime = 30

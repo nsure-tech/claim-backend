@@ -45,3 +45,19 @@ func PaymentAdmin(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, newMessageFail())
 	}
 }
+
+func GetClaimListPayment(ctx *gin.Context) {
+	payments, err := service.GetPaymentUnsettled()
+	if err != nil {
+		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
+		return
+	}
+
+	lists := make([]*claimList, len(payments))
+	for i, payment := range payments {
+		//lists = append(lists, newClaimListPayment(payment))
+		lists[i] = newClaimListPayment(payment)
+	}
+
+	ctx.JSON(http.StatusOK, newMessageDataOK(lists))
+}

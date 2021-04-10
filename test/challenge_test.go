@@ -55,3 +55,14 @@ func TestAdmin(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	fmt.Println(w.Body.String())
 }
+
+func TestGetPayment(t *testing.T) {
+	router := rest.SetupRouter()
+	w := httptest.NewRecorder()
+
+	req, _ := http.NewRequest("GET", "/api/claimListPay", nil)
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, 200, w.Code)
+	fmt.Println(w.Body.String())
+}
