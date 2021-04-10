@@ -30,11 +30,11 @@ func ExecutePayment(id int64) error {
 	if payment == nil {
 		return fmt.Errorf("payment is nil")
 	}
-	if err := AddDelayBill(tx, common.AccountPayment, payment.Currency, payment.Amount.Neg(), decimal.Zero,
+	if err := AddWaitBill(tx, common.AccountPayment, payment.Currency, payment.Amount.Neg(), decimal.Zero,
 		common.BillTypePayment, ""); err != nil {
 		return err
 	}
-	if err := AddDelayBill(tx, payment.UserId, payment.Currency, payment.Amount, decimal.Zero,
+	if err := AddWaitBill(tx, payment.UserId, payment.Currency, payment.Amount, decimal.Zero,
 		common.BillTypePayment, ""); err != nil {
 		return err
 	}
@@ -62,11 +62,11 @@ func PaymentByAdmin(adminId string, claimId int64, pay decimal.Decimal) (bool, e
 	if payment == nil {
 		return false, fmt.Errorf("payment is already finish")
 	}
-	if err = AddDelayBill(tx, common.AccountPayment, payment.Currency, pay.Neg(), decimal.Zero,
+	if err = AddBill(tx, common.AccountPayment, payment.Currency, pay.Neg(), decimal.Zero,
 		common.BillTypePayment, ""); err != nil {
 		return false, err
 	}
-	if err = AddDelayBill(tx, payment.UserId, payment.Currency, pay, decimal.Zero,
+	if err = AddBill(tx, payment.UserId, payment.Currency, pay, decimal.Zero,
 		common.BillTypePayment, ""); err != nil {
 		return false, err
 	}

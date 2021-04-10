@@ -151,10 +151,6 @@ func GetAccount(userId string, currency string) (*models.Account, error) {
 	return mysql.SharedStore().GetAccount(userId, currency)
 }
 
-func GetUnsettledBills(count int) ([]*models.Bill, error) {
-	return mysql.SharedStore().GetUnsettledBills(count)
-}
-
 func GetAccountForUpdate(store models.Store, userId string, currency string) (*models.Account, error) {
 	account, err := store.GetAccountForUpdate(userId, currency)
 	if err != nil {
@@ -175,53 +171,4 @@ func GetAccountForUpdate(store models.Store, userId string, currency string) (*m
 		}
 	}
 	return account, nil
-}
-
-func ExecuteBill(bill *models.Bill) error {
-	tx, err := mysql.SharedStore().BeginTx()
-	if err != nil {
-		return err
-	}
-	defer func() { _ = tx.Rollback() }()
-
-	account, err := GetAccountForUpdate(tx, bill.UserId, bill.Currency)
-	if err != nil {
-		return err
-	}
-
-	account.Available = account.Available.Add(bill.Available)
-	account.Hold = account.Hold.Add(bill.Hold)
-	bill.Settled = true
-
-	err = tx.UpdateBill(bill)
-	if err != nil {
-		return err
-	}
-
-	err = tx.UpdateAccount(account)
-	if err != nil {
-		return err
-	}
-
-	return tx.CommitTx()
-}
-
-func AddDelayBill(store models.Store, userId string, currency string, available, hold decimal.Decimal, billType common.BillType, notes string) error {
-	bill := &models.Bill{
-		UserId:    userId,
-		Currency:  currency,
-		Available: available,
-		Hold:      hold,
-		Type:      billType,
-		Settled:   false,
-		Notes:     notes,
-	}
-	return store.AddBill(bill)
-}
-
-func GetBillsCountByUserId(userId string, statuses []common.BillType) (int, error) {
-	return mysql.SharedStore().GetBillsCountByUserId(userId, statuses)
-}
-func GetBillsByUserId(userId string, statuses []common.BillType, offset, limit int) ([]*models.Bill, error) {
-	return mysql.SharedStore().GetBillsByUserId(userId, statuses, offset, limit)
 }

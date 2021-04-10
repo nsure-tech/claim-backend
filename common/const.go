@@ -19,6 +19,7 @@ const (
 	RewardMinute    uint = 1440
 	RewardChaMinute uint = 1440
 	PaymentMinute   uint = 1440
+	BillMinute      uint = 1440
 	PendingMinute   uint = 14 * 1440
 )
 
@@ -72,6 +73,7 @@ const (
 	BillWorkChanNum       = 100
 	BillWorkUnsettleCount = 1000
 	BillInspectorTime     = 10
+	BillWaitInspectorTime = 120
 
 	DepositInspectorTime      = 120
 	WithdrawInspectorTime     = 120

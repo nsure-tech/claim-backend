@@ -67,6 +67,7 @@ func initDb() error {
 		var tables = []interface{}{
 			&models.Account{},
 			&models.Bill{},
+			&models.WaitBill{},
 			&models.Qualification{},
 			&models.Pending{},
 			&models.Claim{},

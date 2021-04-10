@@ -24,6 +24,10 @@ type Store interface {
 	GetBillsCountByUserId(userId string, statuses []common.BillType) (int, error)
 	GetBillsByUserId(userId string, statuses []common.BillType, offset, limit int) ([]*Bill, error)
 
+	AddWaitBill(bill *WaitBill) error
+	GetUnsettledWaitBills(count int) ([]*WaitBill, error)
+	UpdateWaitBill(bill *WaitBill) error
+
 	AddQualification(qualifications *Qualification) error
 	GetQualificationByArbiterId(arbiterId string) (*Qualification, error)
 	GetQualificationForUpdate(arbiterId string) (*Qualification, error)

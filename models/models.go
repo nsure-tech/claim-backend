@@ -69,6 +69,7 @@ type WaitBill struct {
 	Available decimal.Decimal `sql:"type:decimal(64,0);"`
 	Hold      decimal.Decimal `sql:"type:decimal(64,0);"`
 	Type      common.BillType
+	EndAt     time.Time
 	Settled   bool
 	Notes     string
 }

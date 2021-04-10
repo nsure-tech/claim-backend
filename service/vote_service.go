@@ -287,11 +287,11 @@ func UpdateVoteFill(tx models.Store, voteFill *models.VoteFill) (decimal.Decimal
 	if common.ChallengeStatusSuccess == voteFill.ChallengeStatus &&
 		(voteFill.Status == common.FillStatusChaDifferent || voteFill.Status == common.FillStatusAbstain) {
 		punishFunds = utils.ArbiterNSure()
-		if err := AddDelayBill(tx, common.AccountNSure, common.CurrencyNSure, punishFunds, decimal.Zero,
+		if err := AddWaitBill(tx, common.AccountNSure, common.CurrencyNSure, punishFunds, decimal.Zero,
 			common.BillTypeVotePunish, ""); err != nil {
 			return decimal.Zero, err
 		}
-		if err := AddDelayBill(tx, voteFill.ArbiterId, common.CurrencyNSure, decimal.Zero, punishFunds.Neg(),
+		if err := AddWaitBill(tx, voteFill.ArbiterId, common.CurrencyNSure, decimal.Zero, punishFunds.Neg(),
 			common.BillTypeVotePunish, ""); err != nil {
 			return decimal.Zero, err
 		}

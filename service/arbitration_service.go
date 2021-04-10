@@ -205,7 +205,7 @@ func ExecutePending(pending *models.Pending) error {
 	defer func() { _ = tx.Rollback() }()
 
 	remainingFunds := decimal.NewFromInt(int64(pending.Pending)).Mul(utils.ArbiterNSure())
-	err = AddDelayBill(tx, pending.ArbiterId, common.CurrencyNSure, remainingFunds, remainingFunds.Neg(),
+	err = AddBill(tx, pending.ArbiterId, common.CurrencyNSure, remainingFunds, remainingFunds.Neg(),
 		common.BillTypePending, "")
 	if err != nil {
 		return err

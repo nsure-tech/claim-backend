@@ -78,15 +78,15 @@ func ExecuteChallengeFillSuccess(claimId int64) error {
 		}
 	}
 
-	if err := AddDelayBill(db, common.AccountNSure, common.CurrencyNSure, challengeFunds.Neg(), decimal.Zero,
+	if err := AddWaitBill(db, common.AccountNSure, common.CurrencyNSure, challengeFunds.Neg(), decimal.Zero,
 		common.BillTypeChallengeSuccess, ""); err != nil {
 		return err
 	}
-	if err := AddDelayBill(db, challengeFill.ChallengeId, common.CurrencyNSure, challengeFunds, decimal.Zero,
+	if err := AddWaitBill(db, challengeFill.ChallengeId, common.CurrencyNSure, challengeFunds, decimal.Zero,
 		common.BillTypeChallengeSuccess, ""); err != nil {
 		return err
 	}
-	if err := AddDelayBill(db, challengeFill.ChallengeId, common.CurrencyNSure, challengeFill.Hold, challengeFill.Hold.Neg(),
+	if err := AddWaitBill(db, challengeFill.ChallengeId, common.CurrencyNSure, challengeFill.Hold, challengeFill.Hold.Neg(),
 		common.BillTypeChallengeSuccess, ""); err != nil {
 		return err
 	}
@@ -130,12 +130,12 @@ func ExecuteChallengeFillFail(claimId int64) error {
 		}
 	}
 
-	if err := AddDelayBill(db, common.AccountChallenge, common.CurrencyNSure, chaFill.Hold, decimal.Zero,
+	if err := AddWaitBill(db, common.AccountChallenge, common.CurrencyNSure, chaFill.Hold, decimal.Zero,
 		common.BillTypeChallengeFail, ""); err != nil {
 		return err
 	}
 
-	if err := AddDelayBill(db, chaFill.ChallengeId, common.CurrencyNSure, decimal.Zero, chaFill.Hold.Neg(),
+	if err := AddWaitBill(db, chaFill.ChallengeId, common.CurrencyNSure, decimal.Zero, chaFill.Hold.Neg(),
 		common.BillTypeChallengeFail, ""); err != nil {
 		return err
 	}

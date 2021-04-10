@@ -10,6 +10,7 @@ import (
 )
 
 func StartEngine(ctx context.Context, wg *sync.WaitGroup) {
+	worker.NewBillWaitExecutor().Start(ctx, wg)
 	worker.NewBillExecutor().Start(ctx, wg)
 	worker.NewPendingExecutor().Start(ctx, wg)
 
