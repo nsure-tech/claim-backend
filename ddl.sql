@@ -95,6 +95,25 @@ CREATE TABLE `v_bill` (
                           KEY `idx_s` (`settled`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+drop table if exists `v_wait_bill`;
+CREATE TABLE `v_wait_bill` (
+                               `id` bigint NOT NULL AUTO_INCREMENT,
+                               `created_at` timestamp NULL DEFAULT NULL,
+                               `updated_at` timestamp NULL DEFAULT NULL,
+                               `user_id` varchar(255) NOT NULL,
+                               `currency` varchar(255) NOT NULL,
+                               `available` decimal(64,0) NOT NULL DEFAULT '0',
+                               `hold` decimal(64,0) NOT NULL DEFAULT '0',
+                               `type` varchar(255) NOT NULL,
+                               `end_at` timestamp NULL DEFAULT NULL,
+                               `settled` tinyint(1) NOT NULL DEFAULT '0',
+                               `notes` varchar(255) DEFAULT NULL,
+                               PRIMARY KEY (`id`),
+                               KEY `idx_gsoci` (`user_id`,`currency`,`settled`),
+                               KEY `idx_gsoat` (`end_at`),
+                               KEY `idx_s` (`settled`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 drop table if exists `v_claim`;
 CREATE TABLE `v_claim` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
@@ -168,6 +187,7 @@ CREATE TABLE `v_challenge` (
                                `hold` decimal(64,0) NOT NULL DEFAULT '0',
                                `claim_status` varchar(255) DEFAULT NULL,
                                `status` varchar(255) DEFAULT NULL,
+                               `admin_id` varchar(255) DEFAULT NULL,
                                `settled` tinyint(1) NOT NULL DEFAULT '0',
                                `notes` varchar(255) DEFAULT NULL,
                                PRIMARY KEY (`id`),
@@ -400,6 +420,9 @@ ALTER TABLE `v_claim` ADD `loss` varchar(255) DEFAULT NULL;
 20210410
 ALTER TABLE  `v_payment` ADD `admin_id` varchar(255) DEFAULT NULL;
 ALTER TABLE  `v_payment` ADD `pay` decimal(64,0) NOT NULL DEFAULT '0';
+
+ALTER TABLE  `v_challenge` ADD `admin_id` varchar(255) DEFAULT NULL;
+
 insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 (null,null,"vote_address_1","0x11"),
 (null,null,"vote_address_2","0x12");
@@ -407,3 +430,22 @@ insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 insert into `v_config`(`created_at`,`updated_at`,`key_word`,`val`) values
 (null,null,"payment_address_1","0x11"),
 (null,null,"payment_address_2","0x12");
+
+drop table if exists `v_wait_bill`;
+CREATE TABLE `v_wait_bill` (
+                               `id` bigint NOT NULL AUTO_INCREMENT,
+                               `created_at` timestamp NULL DEFAULT NULL,
+                               `updated_at` timestamp NULL DEFAULT NULL,
+                               `user_id` varchar(255) NOT NULL,
+                               `currency` varchar(255) NOT NULL,
+                               `available` decimal(64,0) NOT NULL DEFAULT '0',
+                               `hold` decimal(64,0) NOT NULL DEFAULT '0',
+                               `type` varchar(255) NOT NULL,
+                               `end_at` timestamp NULL DEFAULT NULL,
+                               `settled` tinyint(1) NOT NULL DEFAULT '0',
+                               `notes` varchar(255) DEFAULT NULL,
+                               PRIMARY KEY (`id`),
+                               KEY `idx_gsoci` (`user_id`,`currency`,`settled`),
+                               KEY `idx_gsoat` (`end_at`),
+                               KEY `idx_s` (`settled`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -91,6 +91,7 @@ func ChallengeVoteByAdmin(adminId string, claimId int64, status common.Challenge
 		return false, fmt.Errorf("challenge is null")
 	}
 	if challenge.Status == common.ChallengeStatusApply {
+		challenge.AdminId = adminId
 		challenge.Status = status
 		if err = db.UpdateChallenge(challenge); err != nil {
 			return false, err

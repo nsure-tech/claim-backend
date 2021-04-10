@@ -14,8 +14,8 @@ const (
 
 const (
 	ApplyMinute     uint = 1440
-	VoteMinute      uint = 1440
-	CloseMinute     uint = 3 * 1440
+	VoteMinute      uint = 3 * 1440
+	CloseMinute     uint = 2 * 1440
 	RewardMinute    uint = 1440
 	RewardChaMinute uint = 1440
 	PaymentMinute   uint = 1440

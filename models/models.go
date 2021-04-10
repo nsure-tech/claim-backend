@@ -60,6 +60,19 @@ type Bill struct {
 	Notes     string
 }
 
+type WaitBill struct {
+	Id        int64 `gorm:"column:id;primary_key;AUTO_INCREMENT"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	UserId    string
+	Currency  string
+	Available decimal.Decimal `sql:"type:decimal(64,0);"`
+	Hold      decimal.Decimal `sql:"type:decimal(64,0);"`
+	Type      common.BillType
+	Settled   bool
+	Notes     string
+}
+
 type Qualification struct {
 	Id        int64 `gorm:"column:id;primary_key;AUTO_INCREMENT"`
 	CreatedAt time.Time
@@ -144,6 +157,7 @@ type Challenge struct {
 	Hold        decimal.Decimal `gorm:"column:hold" sql:"type:decimal(64,0);"`
 	ClaimStatus common.ClaimStatus
 	Status      common.ChallengeStatus
+	AdminId     string
 	Settled     bool
 	Notes       string
 }
