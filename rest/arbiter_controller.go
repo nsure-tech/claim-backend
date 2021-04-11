@@ -145,7 +145,7 @@ func PendingArbiterOld(ctx *gin.Context) {
 		return
 	}
 	//arbiterId := GetCurrentUser(ctx)
-	qualifications, account, err := service.PendingQualifications(req.UserId, req.Number)
+	qualifications, account, err := service.PendingQualification(req.UserId, req.Number)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, newMessageVo(err))
 		return
