@@ -432,8 +432,8 @@ func TestVoteChaSuccess1_2(t *testing.T) {
 		return
 	}
 
-	time.Sleep(3*time.Minute)
-	time.Sleep(time.Duration(common.RewardMinute)*time.Minute)
+	time.Sleep(3 * time.Minute)
+	time.Sleep(time.Duration(common.RewardMinute) * time.Minute)
 	tGetAccountQua(afterAccount, afterQualification)
 
 	arbiter := arbiters[2]

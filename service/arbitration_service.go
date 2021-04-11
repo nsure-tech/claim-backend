@@ -48,7 +48,7 @@ func ApplyQualification(arbiterId string, num int) (*models.Qualification, *mode
 	return qualification, account, db.CommitTx()
 }
 
-func PendingQualifications(arbiterId string, num int) (*models.Qualification, *models.Account, error) {
+func PendingQualification(arbiterId string, num int) (*models.Qualification, *models.Account, error) {
 	db, err := mysql.SharedStore().BeginTx()
 	if err != nil {
 		return nil, nil, err

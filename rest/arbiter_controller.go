@@ -31,7 +31,8 @@ func GetArbiter(ctx *gin.Context) {
 	}
 
 	myReward := service.GetRewardByArbiterId(userId)
-	arbiterVo := newArbiterRewardVo(qualification, account, myReward)
+	eth_pay := service.GetETHByUserId(userId)
+	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth_pay)
 	ctx.JSON(http.StatusOK, newMessageDataOK(arbiterVo))
 }
 
@@ -54,18 +55,19 @@ func AddArbiter(ctx *gin.Context) {
 	}
 
 	userId = utils.Address(userId)
-	qualifications, account, err := service.ApplyQualification(userId, req.Number)
+	qualification, account, err := service.ApplyQualification(userId, req.Number)
 	if err != nil {
 		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
 		return
 	}
-	if account == nil || qualifications == nil {
-		ctx.JSON(http.StatusOK, newMessageInternalServerError(fmt.Errorf("invalid account or qualifications")))
+	if account == nil || qualification == nil {
+		ctx.JSON(http.StatusOK, newMessageInternalServerError(fmt.Errorf("invalid account or qualification")))
 		return
 	}
 
 	myReward := service.GetRewardByArbiterId(userId)
-	arbiterVo := newArbiterRewardVo(qualifications, account, myReward)
+	eth_pay := service.GetETHByUserId(userId)
+	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth_pay)
 
 	ctx.JSON(http.StatusOK, newMessageDataOK(arbiterVo))
 }
@@ -88,17 +90,18 @@ func PendingArbiter(ctx *gin.Context) {
 		return
 	}
 	userId = utils.Address(userId)
-	qualifications, account, err := service.PendingQualifications(userId, req.Number)
+	qualification, account, err := service.PendingQualification(userId, req.Number)
 	if err != nil {
 		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
 		return
 	}
-	if account == nil || qualifications == nil {
-		ctx.JSON(http.StatusOK, newMessageInternalServerError(fmt.Errorf("invalid account or qualifications")))
+	if account == nil || qualification == nil {
+		ctx.JSON(http.StatusOK, newMessageInternalServerError(fmt.Errorf("invalid account or qualification")))
 		return
 	}
 	myReward := service.GetRewardByArbiterId(userId)
-	arbiterVo := newArbiterRewardVo(qualifications, account, myReward)
+	eth_pay := service.GetETHByUserId(userId)
+	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth_pay)
 
 	ctx.JSON(http.StatusOK, newMessageDataOK(arbiterVo))
 

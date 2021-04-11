@@ -13,12 +13,12 @@ const (
 )
 
 const (
-	ApplyMinute     uint = 10 // 1440
-	VoteMinute      uint = 30 // 3 * 1440
-	CloseMinute     uint = 20 // 2 * 1440
-	RewardMinute    uint = 10 // 1440
-	BillMinute      uint = 10 // 1440
-	PendingMinute   uint = 140 // 14 * 1440
+	ApplyMinute   uint = 10  // 1440
+	VoteMinute    uint = 30  // 3 * 1440
+	CloseMinute   uint = 20  // 2 * 1440
+	RewardMinute  uint = 10  // 1440
+	BillMinute    uint = 10  // 1440
+	PendingMinute uint = 140 // 14 * 1440
 
 	RewardChaMinute uint = 1440
 	PaymentMinute   uint = 1440
@@ -43,6 +43,7 @@ const (
 	AccountChallenge       = "0x123456ccc"
 	AccountPayment         = "0x123456bbb"
 	CurrencyNSure          = "Nsure"
+	CurrencyETH            = "ETH"
 	ArbiterNSure     int64 = 2000
 	ChallengeTimes   int64 = 10
 	CookieMaxAge           = 7 * 24 * 60 * 60

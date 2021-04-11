@@ -16,7 +16,6 @@ import (
 func init() {
 	common.ClaimActive, _ = service.GetClaimCount(false)
 	common.ClaimClosed, _ = service.GetClaimCount(true)
-	common.RewardTotal = service.GetRewardTotal()
 	common.VoteAddress = make(map[string]struct{})
 	for i := 1; i <= common.AdminAddressNum; i++ {
 		addressKey := common.VoteAddressPrefix + utils.IntToA(i)
