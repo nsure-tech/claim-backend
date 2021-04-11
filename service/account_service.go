@@ -91,6 +91,14 @@ func GetBalanceByUserId(userId string) (*models.Account, error) {
 	return GetAccount(userId, common.CurrencyNSure)
 }
 
+func GetETHByUserId(userId string) decimal.Decimal {
+	if amount, err := GetAccount(userId, common.CurrencyETH); err == nil && amount != nil {
+		return amount.Available
+	} else {
+		return decimal.Zero
+	}
+}
+
 func HoldBalance(db models.Store, userId string, currency string, amount decimal.Decimal, billType common.BillType) (*models.Account, error) {
 	if amount.LessThanOrEqual(decimal.Zero) {
 		return nil, errors.New("size less than 0")
