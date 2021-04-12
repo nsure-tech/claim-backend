@@ -20,9 +20,9 @@ mv vote.json.example vote.json
 
 ---
 
-<img src="https://github.com/nsure-tech/claim-backend/blob/master/claim_status.png" width="880px" height="840px"/>
+<img src="https://github.com/nsure-tech/claim-backend/blob/main/claim_status.png" width="880px" height="840px"/>
 ---
 
 ## User Vote Status
 
-<img src="https://github.com/nsure-tech/claim-backend/blob/master/user_status.png" width="880px" height="840px"/>
+<img src="https://github.com/nsure-tech/claim-backend/blob/main/user_status.png" width="880px" height="840px"/>
