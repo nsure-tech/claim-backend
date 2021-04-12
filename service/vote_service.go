@@ -165,11 +165,9 @@ func ExecuteVote(claimId int64) error {
 
 	if pass >= common.VoteMinNum {
 		claim.Status = common.ClaimStatusPass
-		claim.PaymentStatus = common.PaymentStatusPass
 		rewardNum = pass
 	} else if deny >= common.VoteMinNum {
 		claim.Status = common.ClaimStatusDeny
-		claim.PaymentStatus = common.PaymentStatusFail
 		rewardNum = deny
 	} else {
 		claim.Status = common.ClaimStatusArbiterFail

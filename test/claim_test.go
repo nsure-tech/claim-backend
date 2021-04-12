@@ -25,9 +25,9 @@ func TestPingRoute(t *testing.T) {
 
 func TestClaimNew(t *testing.T) {
 	w := httptest.NewRecorder()
-	reader := strings.NewReader(`{"user_id":"0x923129","product":"product1",
+	reader := strings.NewReader(`{"user_id":"0x9231295","product":"product1",
     "currency":"ETH","amount":"1", "reward":"103",
-    "cover_id":"126", "cover_hash":"0x11135",
+    "cover_id":"126", "cover_hash":"0x111355",
     "cover_begin_at":"2021-04-04T08:08:08+08:00",
     "cover_end_at":"2021-08-04T08:08:08+08:00", "desc":"a1", "cred":"p1"}`)
 	req, _ := http.NewRequest("POST", "/claim/new", reader)

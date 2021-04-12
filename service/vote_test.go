@@ -378,7 +378,7 @@ func TestVoteChaFail1_2(t *testing.T) {
 }
 
 func TestVoteChaSuccess1_2(t *testing.T) {
-	claimId := int64(34)
+	claimId := int64(1)
 	chaId := "cha04"
 	tGetAccountQua(beforeAccount, beforeQualification)
 
