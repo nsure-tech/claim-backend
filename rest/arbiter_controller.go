@@ -31,8 +31,8 @@ func GetArbiter(ctx *gin.Context) {
 	}
 
 	myReward := service.GetRewardByArbiterId(userId)
-	eth_pay := service.GetETHByUserId(userId)
-	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth_pay)
+	pay := service.GetETHByUserId(userId)
+	arbiterVo := newArbiterRewardVo(qualification, account, myReward, pay)
 	ctx.JSON(http.StatusOK, newMessageDataOK(arbiterVo))
 }
 
@@ -66,8 +66,8 @@ func AddArbiter(ctx *gin.Context) {
 	}
 
 	myReward := service.GetRewardByArbiterId(userId)
-	eth_pay := service.GetETHByUserId(userId)
-	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth_pay)
+	eth := service.GetETHByUserId(userId)
+	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth)
 
 	ctx.JSON(http.StatusOK, newMessageDataOK(arbiterVo))
 }
@@ -100,8 +100,8 @@ func PendingArbiter(ctx *gin.Context) {
 		return
 	}
 	myReward := service.GetRewardByArbiterId(userId)
-	eth_pay := service.GetETHByUserId(userId)
-	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth_pay)
+	eth := service.GetETHByUserId(userId)
+	arbiterVo := newArbiterRewardVo(qualification, account, myReward, eth)
 
 	ctx.JSON(http.StatusOK, newMessageDataOK(arbiterVo))
 

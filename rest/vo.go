@@ -438,14 +438,14 @@ func newArbiterVo(qualification *models.Qualification, account *models.Account) 
 type arbiterRewardVo struct {
 	ArbiterId        string `json:"user_id"`
 	Available        string `json:"available"`
-	Hold             string `json:"hold"`
-	ArbiterAvailable int    `json:"arbiter_sum"`
+	Hold             string `json:"locked"`
+	ArbiterAvailable int    `json:"available_role"`
 	Pending          int    `json:"pending"`
-	ETHPay           string `json:"eth_pay"`
-	MyReward         string `json:"my_reward"`
+	ETH              string `json:"available_eth"`
+	MyReward         string `json:"reward"`
 }
 
-func newArbiterRewardVo(qualification *models.Qualification, account *models.Account, myReward, eth_pay decimal.Decimal) *arbiterRewardVo {
+func newArbiterRewardVo(qualification *models.Qualification, account *models.Account, myReward, eth decimal.Decimal) *arbiterRewardVo {
 	return &arbiterRewardVo{
 		ArbiterId:        account.UserId,
 		Available:        utils.DToString(account.Available),
@@ -453,7 +453,7 @@ func newArbiterRewardVo(qualification *models.Qualification, account *models.Acc
 		ArbiterAvailable: qualification.Available,
 		Pending:          qualification.Pending + qualification.Used,
 		MyReward:         utils.DToString(myReward),
-		ETHPay:           utils.DToString(eth_pay),
+		ETH:              utils.DToString(eth),
 	}
 }
 
