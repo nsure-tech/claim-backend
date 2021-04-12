@@ -138,7 +138,12 @@ func GetClaimByArbiter(arbiterId string, product string, status common.ClaimStat
 }
 
 func ClaimApply(claimId int64, arbiterId string) (string, error) {
-	// status := common.ApplyStatusApply
+	tx, err := mysql.SharedStore().BeginTx()
+	if err != nil {
+		return "", err
+	}
+	defer func() { _ = tx.Rollback() }()
+
 	applies, err := GetApplyByClaimId(claimId, nil)
 	if err != nil {
 		return "", err
@@ -152,12 +157,6 @@ func ClaimApply(claimId int64, arbiterId string) (string, error) {
 	if applyNum >= common.ApplyMaxNum {
 		return "", errors.New("already max apply num")
 	}
-
-	tx, err := mysql.SharedStore().BeginTx()
-	if err != nil {
-		return "", err
-	}
-	defer func() { _ = tx.Rollback() }()
 
 	qualifications, err := SubAvailableNum(tx, arbiterId, 1)
 	if err != nil {

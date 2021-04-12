@@ -57,8 +57,11 @@ func ApplyVote(claimId int64, status common.ClaimStatus, arbiterId, coverHash, s
 
 	return string(apply.Status), tx.CommitTx()
 }
+func ApplyVoteAdmin(claimId int64, status common.ClaimStatus, adminId, coverHash, signHash string) (string, error) {
+	if !VoteAddress(adminId) {
+		return "", fmt.Errorf("%v isn't vote admin address", adminId)
+	}
 
-func ApplyVoteAdmin(claimId int64, status common.ClaimStatus, arbiterId, coverHash, signHash string) (string, error) {
 	tx, err := mysql.SharedStore().BeginTx()
 	if err != nil {
 		return "", err
@@ -71,15 +74,15 @@ func ApplyVoteAdmin(claimId int64, status common.ClaimStatus, arbiterId, coverHa
 		return "", fmt.Errorf("already vote:%v", len(votes))
 	}
 
-	if vote, err := tx.GetVoteForUpdate(claimId, arbiterId); err != nil {
+	if vote, err := tx.GetVoteForUpdate(claimId, adminId); err != nil {
 		return "", err
 	} else if vote != nil {
-		return "", fmt.Errorf("vote errors isn't nil")
+		return "", fmt.Errorf("%v already vote", adminId)
+	}
+	if _, err = SubAvailableNum(tx, adminId, 1); err != nil {
+		return "", err
 	}
 
-	if !VoteAddress(arbiterId) {
-		return "", fmt.Errorf("%v isn't vote admin address", arbiterId)
-	}
 	claim, err := tx.GetClaimById(claimId)
 	if err != nil {
 		return "", err
@@ -96,7 +99,7 @@ func ApplyVoteAdmin(claimId int64, status common.ClaimStatus, arbiterId, coverHa
 
 	vote := &models.Vote{
 		ClaimId:      claimId,
-		ArbiterId:    arbiterId,
+		ArbiterId:    adminId,
 		UserId:       claim.UserId,
 		Product:      claim.Product,
 		CoverId:      claim.CoverId,

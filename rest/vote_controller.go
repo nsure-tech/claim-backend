@@ -65,8 +65,8 @@ func PlaceVoteAdmin(ctx *gin.Context) {
 		status = common.ClaimStatusDeny
 	}
 
-	userId = utils.Address(userId)
-	ret, err := service.ApplyVoteAdmin(req.ClaimId, status, userId, req.CoverHash, signHash)
+	admin := utils.Address(userId)
+	ret, err := service.ApplyVoteAdmin(req.ClaimId, status, admin, req.CoverHash, signHash)
 	if err != nil {
 		log.GetLog().Info("ApplyVoteAdmin", zap.Error(err))
 		ctx.JSON(http.StatusOK, newMessageInternalServerError(err))
