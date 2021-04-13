@@ -156,5 +156,5 @@ const (
 const (
 	TypedDataDomainNameClaim    = "Treasury"
 	TypedDataDomainNameWithdraw = "Treasury"
-	DurationClaim               = 30
+	DurationClaim               = 28
 )
