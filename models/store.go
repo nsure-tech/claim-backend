@@ -122,6 +122,8 @@ type Store interface {
 	GetWithdrawsByEndAt(status common.WithdrawStatus, endTime uint) ([]*Withdraw, error)
 	AddWithdraw(withdraw *Withdraw) error
 	UpdateWithdraw(withdraw *Withdraw) error
+	GetWithdrawNonceByUserId(userId string, status common.WithdrawStatus) (*common.Nonce, error)
+
 	AddChainClaim(chainClaim *ChainClaim) error
 	UpdateChainClaim(chainClaim *ChainClaim) error
 }

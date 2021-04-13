@@ -25,6 +25,10 @@ type Reward struct {
 	Reward decimal.Decimal
 }
 
+type Nonce struct {
+	Nonce *uint64
+}
+
 type BuyClaim struct {
 	Buyer    string
 	Amount   decimal.Decimal

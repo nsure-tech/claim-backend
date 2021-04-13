@@ -15,7 +15,7 @@ type GbeConfig struct {
 	ChainId                 int64            `json:"chainId"`
 	ContractTreasuryAddress string           `json:"contractTreasuryAddress"`
 	ContractBuyAddress      string           `json:"contractBuyAddress"`
-	DepositAddress          string           `json:"depositAddress"`
+	AlarmUrl                string           `json:"alarmUrl"`
 	KeySecret               string           `json:"keySecret"`
 }
 

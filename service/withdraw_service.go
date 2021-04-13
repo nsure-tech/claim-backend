@@ -13,11 +13,32 @@ import (
 	"time"
 )
 
+func GetWithdrawNonceByUserId(userId string, status common.WithdrawStatus) (*common.Nonce, error) {
+	return mysql.SharedStore().GetWithdrawNonceByUserId(userId, status)
+}
+
+func JudgeNonce(userId string, nonce uint64) bool {
+	if seq, err := GetWithdrawNonceByUserId(userId, common.WithdrawStatusSuccess); err == nil {
+		if seq != nil && seq.Nonce != nil {
+			if nonce == *seq.Nonce+1 {
+				return true
+			}
+		} else {
+			if nonce == 0 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func AddWithdraw(userId, currencyContr string, amount decimal.Decimal, nonce uint64) (*common.WithdrawResult, error) {
 	withdrawResult := &common.WithdrawResult{}
 	if oldWithdraw, err := mysql.SharedStore().GetWithdrawByUserNonce(userId, nonce); err == nil && oldWithdraw != nil {
 		return withdrawResult, fmt.Errorf("please wait")
-		// return withdrawResult, fmt.Errorf("pending alrealy withdraw userId %v nonce %v", userId, nonce)
+	}
+	if !JudgeNonce(userId, nonce) {
+		return withdrawResult, fmt.Errorf("userId %v nonce %v error", userId, nonce)
 	}
 	currency, err := GetCurrency(currencyContr)
 	if err != nil {
@@ -94,8 +115,11 @@ func AddWithdraw(userId, currencyContr string, amount decimal.Decimal, nonce uin
 		log.GetLog().Error("Add Withdraw", zap.Error(err))
 		return nil, err
 	}
-
-	return withdrawResult, db.CommitTx()
+	if err = db.CommitTx(); err != nil {
+		return nil, err
+	}
+	utils.AlarmMessage(userId, currency, amount, nonce)
+	return withdrawResult, nil
 }
 
 func AddChainClaim(userId, currencyContr string, amount decimal.Decimal, nonce uint64, raw string) error {

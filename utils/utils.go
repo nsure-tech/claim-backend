@@ -6,7 +6,13 @@ import (
 	"github.com/ethereum/go-ethereum/signer/core"
 	"github.com/goinggo/mapstructure"
 	"github.com/shopspring/decimal"
+	"go.uber.org/zap"
+	"net/http"
+	"nsure/vote/common"
+	"nsure/vote/config"
+	"nsure/vote/log"
 	"strconv"
+	"strings"
 )
 
 func I64ToA(i int64) string {
@@ -75,4 +81,11 @@ func MessageToStruct1(message *map[string]interface{}, val interface{}) error {
 		return err
 	}
 	return nil
+}
+
+func AlarmMessage(userId, currency string, amount decimal.Decimal, nonce uint64) {
+	sendStr := userId + " nonce=" + U64ToA(nonce) + " withdraw " + currency + " " + amount.DivRound(decimal.NewFromInt(common.UnitNSure), 18).String()
+	sender := strings.NewReader(`{"msg_type":"text","content":{"text":"` + sendStr + `"}}`)
+	http.Post(config.GetConfig().AlarmUrl, "application/json", sender)
+	log.GetLog().Info("AlarmMessage", zap.String("withdraw", sendStr))
 }

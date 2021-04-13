@@ -14,6 +14,21 @@ var applies []string
 func init() {
 	applies = []string{"test01", "test02", "test03", "test04", "test05", "test06", "test07", "test08", "test09"}
 }
+
+func TestNonce(t *testing.T) {
+	nonce, err := GetWithdrawNonceByUserId("0x2e9475c282069675fFAc22a8cd5038E4DAC01634", common.WithdrawStatusSuccess)
+	if err != nil {
+		fmt.Println(err)
+	}
+	if nonce == nil {
+		fmt.Println("nil nil")
+	}
+	fmt.Println("kkkk")
+	fmt.Println(nonce.Nonce)
+	//if nonce.Nonce!=nil{
+	//	fmt.Println(*nonce.Nonce)
+	//}
+}
 func TestApply02(t *testing.T) {
 	beforeQua := make(map[string]*models.Qualification)
 	afterQua := make(map[string]*models.Qualification)
