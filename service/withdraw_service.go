@@ -18,6 +18,11 @@ func GetWithdrawNonceByUserId(userId string, status common.WithdrawStatus) (*com
 }
 
 func JudgeNonce(userId string, nonce uint64) bool {
+	if chainNonce, err := contract.GetNonceByAddress(userId); err != nil {
+		return false
+	} else if chainNonce != nonce {
+		return false
+	}
 	if seq, err := GetWithdrawNonceByUserId(userId, common.WithdrawStatusSuccess); err == nil {
 		if seq != nil && seq.Nonce != nil {
 			if nonce == *seq.Nonce+1 {

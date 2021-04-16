@@ -8,8 +8,8 @@ const (
 
 const (
 	ApplyMaxNum   = 20 // 20 5
-	ArbiterMaxNum = 5 // 5  3
-	VoteMinNum    = 3 // 3  2
+	ArbiterMaxNum = 5  // 5  3
+	VoteMinNum    = 3  // 3  2
 )
 
 const (
@@ -35,8 +35,9 @@ const (
 )
 
 const (
-	ConfirmBlock       uint64 = 2
-	WithdrawBackMinute uint   = 8
+	ConfirmBlock        uint64 = 2
+	WithdrawBackMinute  uint   = 8
+	WithdrawChainMinute uint   = 10
 
 	UnitNSure        int64 = 1_000_000_000_000_000_000
 	AccountNSure           = "0x123456aaa"

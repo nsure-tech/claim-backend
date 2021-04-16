@@ -24,6 +24,7 @@ type WithdrawExecutor struct {
 	nSure        *contract.Contract
 	start        uint64
 	contrAddress string
+	chainStatus  bool
 }
 
 func (w *WithdrawExecutor) Start(ctx context.Context, wg *sync.WaitGroup) {
@@ -61,6 +62,7 @@ func NewWithdrawExecutor() *WithdrawExecutor {
 		nSure:        nSureContract,
 		start:        utils.StringToUint64(start),
 		contrAddress: contrAddress.String(),
+		chainStatus:  false,
 	}
 }
 
@@ -136,9 +138,11 @@ func (w *WithdrawExecutor) runInspector(ctx context.Context) {
 		case <-time.After(common.WithdrawInspectorTime * time.Second):
 			blockNumber, err := w.client.BlockNumber(context.Background())
 			if err != nil {
+				w.chainStatus = false
 				log.GetLog().Error("BlockNumber error!", zap.Error(err))
 				continue
 			}
+			w.chainStatus = true
 			w.workerCh <- blockNumber
 
 		case <-ctx.Done():
@@ -150,9 +154,18 @@ func (w *WithdrawExecutor) runInspector(ctx context.Context) {
 }
 
 func (w *WithdrawExecutor) runWithdrawBack(ctx context.Context) {
+	chainStatues := false
 	for {
 		select {
 		case <-time.After(common.WithdrawBackInspectorTime * time.Second):
+			if !w.chainStatus {
+				chainStatues = false
+				continue
+			}
+			if !chainStatues {
+				chainStatues = true
+				time.Sleep(time.Duration(common.WithdrawChainMinute) * time.Minute)
+			}
 			withdraws, err := service.GetWithdrawsByEndAt(common.WithdrawBackMinute)
 			if err != nil {
 				log.GetLog().Error("service GetWithdrawsByEndAt", zap.Error(err))

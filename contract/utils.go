@@ -50,6 +50,22 @@ func GetChainId() *big.Int {
 	return chainID
 }
 
+func GetNonceByAddress(address string) (uint64, error) {
+	contrAddress := ethcommon.HexToAddress(config.GetConfig().ContractTreasuryAddress)
+	treasuryContract, err := NewContract(contrAddress, GetClient())
+	if err != nil {
+		log.GetLog().Error("contract Treasury", zap.Error(err))
+		return 0, err
+	}
+	argAddress := ethcommon.HexToAddress(address)
+	nonce, err := treasuryContract.Nonces(nil, argAddress)
+	if err != nil {
+		log.GetLog().Error("contract Nonce", zap.Error(err))
+		return 0, err
+	}
+	return nonce.Uint64(), nil
+}
+
 func GetBuyClaim(coverId *big.Int) (*common.BuyClaim, error) {
 	contrAddress := ethcommon.HexToAddress(config.GetConfig().ContractBuyAddress)
 	buyContract, err := NewBuy(contrAddress, GetClient())
