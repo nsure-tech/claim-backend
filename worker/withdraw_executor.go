@@ -36,8 +36,8 @@ func (w *WithdrawExecutor) Start(ctx context.Context, wg *sync.WaitGroup) {
 		}
 	}
 
-	go w.runInspector(ctx)
-	go w.runProcess(wg)
+	//go w.runInspector(ctx)
+	//go w.runProcess(wg)
 	go w.runWithdrawBack(ctx)
 }
 
